@@ -1,12 +1,20 @@
+// Нет реализации метода fetch
 class ServerApi {
-  public processAddAccountRequest(url: string, account: TAccount) {
+  public processAddAccountRequest(account: TAccount) {
+    // end-point является частью апи, а не бизнес логики, потому не приходит в аргументе
+    const url: string;
     return this.fetch('POST', url, account);
   }
 
-  public sendDeleteAccountRequest(url: string, accountId: string) {
+  public sendDeleteAccountRequest(accountId: string) {
+    // end-point является частью апи, а не бизнес логики, потому не приходит в аргументе
+    const url: string;
     return this.fetch('DELETE', url, accountId);
   }
 
-  public requestAuth(url: string, credentials: TCredentials) {
+  public requestAuth(credentials: TCredentials) {
+    // end-point является частью апи, а не бизнес логики, потому не приходит в аргументе
+    const url: string;
     return this.fetch('GET', url, credentials);
   }
+}

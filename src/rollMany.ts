@@ -1,5 +1,6 @@
 const rollMany = (n: number, pins: number) => {
-  for (let rollCount = 0; rollCount < n; rollCount++) {
-     console.log(pins);
+  // классическое наименование index'ов перебора i, j, k
+  for (let i = 0; i < n; i++) {
+    console.log(pins);
   }
 };

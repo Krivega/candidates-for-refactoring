@@ -3,15 +3,16 @@ class MoogDiver {
   splines: List<Spline>;
 
   public dive(reason: string) {
-    saturateGradient();
+    // обращение к методам класса через this отсутствует
+    this.saturateGradient();
 
-    reticulateSplines();
+    this.reticulateSplines();
 
-    diveForMoog(reason);
+    this.diveForMoog(reason);
   }
 
   private saturateGradient() {
-    this.gradient = // somoe logic
+    this.gradient = // some logic
   }
 
   private reticulateSplines() {
@@ -22,10 +23,7 @@ class MoogDiver {
   private diveForMoog(reason: string) {
     // some logic
     
-    if(reason === 'ok'){
-      this.splines.doOk();
-    } else {
-      this.splines.doNotOk();
-    }
+    if (reason === 'ok') this.splines.doOk();
+    else this.splines.doNotOk();
   }
 }

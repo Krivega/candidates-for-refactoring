@@ -1,3 +1,4 @@
+// Класс не является Overloaded
 class OverloadedClass {
   field1: number;
   field2: string;

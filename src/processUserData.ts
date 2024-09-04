@@ -1,6 +1,7 @@
-function processUserData(user) {
+// отсутствует типизация
+function processUserData<T>(user: T): void {
   // Получаем данные пользователя
-  const userData = getUserData(user);
+  const userData: { age: number } = getUserData(user);
 
   // Проверяем данные пользователя
   if (userData.age >= 18) {

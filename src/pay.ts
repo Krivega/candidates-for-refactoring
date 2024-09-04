@@ -1,9 +1,12 @@
+// employee серьезный компонент, я бы сказал самодостаточный
 const pay = () => {
-  for (let e of employees) {
-    if (e.isPayday()) {
-      const pay = e.calculatePay();
+  // переменные из 1-2 символов сложно воспринимаются и плохо поддаются чтению,
+  // в однострочном варианте допускаю
+  for (let employee of employees) {
+    if (employee.isPayday()) {
+      const pay = employee.calculatePay();
 
-      e.deliverPay(pay);
+      employee.deliverPay(pay);
     }
   }
 };

@@ -1,16 +1,16 @@
-
-
 type TPayment = {
   amount: number;
   rcCode: number;
 };
 
 type TGatewayService = {
-  sendAuth: (payment: TPayment) => number;
+  // Предположу, что одразумевается отправка на сервер
+  sendAuth: (payment: TPayment) => Promise<number>;
 };
 
-const auth = (payment: TPayment, gateway: TGatewayService) => {
-  const rcCode = gateway.sendAuth(payment);
-
-  payment.rcCode = rcCode;
+// Направляем запрос на сервер, потому async/await необходимо добавить
+// чтобы в rcCode не записать Promise<number>
+// ! функция вернёт Promise<undefined>
+const auth = async (payment: TPayment, gateway: TGatewayService) => {
+  payment.rcCode = await gateway.sendAuth(payment);
 };

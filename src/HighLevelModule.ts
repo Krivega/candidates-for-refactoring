@@ -1,3 +1,4 @@
+// Всё "ОК", это "копозиция" по ооп
 class LowLevelModule {
   doSomething() {
     // реализация

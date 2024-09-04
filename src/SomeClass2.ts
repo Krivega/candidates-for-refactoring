@@ -1,10 +1,6 @@
+// 1. неиспользуемые переменные необходимо удалять
+// 2. конструктор у класса будет в любом случае, просто не будет задан явно
 class SomeClass2 {
-  private unusedVariable: number;
-
-  constructor() {
-    console.log('Constructor is unnecessary if not initializing anything');
-  }
-
   public someMethod(): void {
     console.log('This method performs a useful action');
   }
