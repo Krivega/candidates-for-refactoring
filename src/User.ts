@@ -1,3 +1,24 @@
+/**
+ * Что было плохо: Конструктор с множеством параметров был сложным и неудобным для использования.
+ * Что стало лучше: Введен объект конфигурации для передачи параметров.
+ */
+
+interface UserConfig {
+  name: string;
+  age: number;
+  address: string;
+  phoneNumber: string;
+  email: string;
+  role: string;
+  isActive: boolean;
+  isVerified: boolean;
+  isPremium: boolean;
+  lastLogin: Date;
+  registrationDate: Date;
+  profilePicture: string;
+  bio: string;
+  interests: string[];
+}
 
 class User {
   private name: string;
@@ -15,36 +36,21 @@ class User {
   private bio: string;
   private interests: string[];
 
-  constructor(
-    name: string,
-    age: number,
-    address: string,
-    phoneNumber: string,
-    email: string,
-    role: string,
-    isActive: boolean,
-    isVerified: boolean,
-    isPremium: boolean,
-    lastLogin: Date,
-    registrationDate: Date,
-    profilePicture: string,
-    bio: string,
-    interests: string[]
-  ) {
-    this.name = name;
-    this.age = age;
-    this.address = address;
-    this.phoneNumber = phoneNumber;
-    this.email = email;
-    this.role = role;
-    this.isActive = isActive;
-    this.isVerified = isVerified;
-    this.isPremium = isPremium;
-    this.lastLogin = lastLogin;
-    this.registrationDate = registrationDate;
-    this.profilePicture = profilePicture;
-    this.bio = bio;
-    this.interests = interests;
+  constructor(config: UserConfig) {
+    this.name = config.name;
+    this.age = config.age;
+    this.address = config.address;
+    this.phoneNumber = config.phoneNumber;
+    this.email = config.email;
+    this.role = config.role;
+    this.isActive = config.isActive;
+    this.isVerified = config.isVerified;
+    this.isPremium = config.isPremium;
+    this.lastLogin = config.lastLogin;
+    this.registrationDate = config.registrationDate;
+    this.profilePicture = config.profilePicture;
+    this.bio = config.bio;
+    this.interests = config.interests ?? [];
   }
 
   // ... (other methods)

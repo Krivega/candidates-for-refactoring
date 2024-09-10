@@ -1,10 +1,12 @@
+/**
+ * Что было плохо: Переменная unusedVariable не использовалась в классе.
+ * Что стало лучше: Переменная была удалена.
+ *
+ * Что было плохо: Конструктор не выполнял никакой полезной работы, что делало его ненужным.
+ * Что стало лучше: Конструктор был удален.
+ */
+
 class SomeClass2 {
-  private unusedVariable: number;
-
-  constructor() {
-    console.log('Constructor is unnecessary if not initializing anything');
-  }
-
   public someMethod(): void {
     console.log('This method performs a useful action');
   }

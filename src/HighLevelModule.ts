@@ -1,17 +1,33 @@
-class LowLevelModule {
-  doSomething() {
-    // реализация
+/**
+ * Что было плохо: Высокоуровневый модуль зависел от конкретной реализации низкоуровневого модуля.
+ * Что стало лучше: Теперь высокоуровневый модуль зависит от ILowLevelModule.
+ *
+ * Что было плохо: Класс HighLevelModule был жестко связан с конкретной реализацией LowLevelModule.
+ * Что стало лучше: Зависимость теперь передается через конструктор, что значительно снижает связанность и улучшает расширяемость и тестируемость кода.
+ */
+
+interface ILowLevelModule {
+  doSomething(): void;
+}
+
+class LowLevelModule implements ILowLevelModule {
+  public doSomething(): void {
+    console.log('LowLevelModule is doing something');
   }
 }
 
 class HighLevelModule {
-  private lowLevelModule: LowLevelModule;
+  private lowLevelModule: ILowLevelModule;
 
-  constructor() {
-    this.lowLevelModule = new LowLevelModule(); // создание экземпляра
+  constructor(lowLevelModule: ILowLevelModule) {
+    this.lowLevelModule = lowLevelModule;
   }
 
-  doSomethingElse() {
-    this.lowLevelModule.doSomething(); // использование непосредственной зависимости
+  public doSomethingElse(): void {
+    this.lowLevelModule.doSomething();
   }
 }
+
+const lowLevelModule = new LowLevelModule();
+const highLevelModule = new HighLevelModule(lowLevelModule);
+highLevelModule.doSomethingElse();

@@ -1,3 +1,20 @@
-function calculate(a, b) {
-  return a + b;
+/**
+ * Что было плохо: Функция была жестко привязана к вычислению суммы чисел.
+ * Что стало лучше: Функция теперь принимает дополнительный параметр operation, который позволяет выполнять любую математическую операцию.
+ *
+ * Что было плохо: Функция не имела типов для параметров и возвращаемого значения.
+ * Что стало лучше: Добавлены типы для параметров (a и b) и возвращаемого значения
+ */
+
+function calculate2(
+  a: number,
+  b: number,
+  operation: (a: number, b: number) => number = (a, b) => a + b,
+): number {
+  return operation(a, b);
 }
+
+const multiply = (a: number, b: number) => a * b;
+
+calculate2(5, 10);
+calculate2(5, 10, multiply);
