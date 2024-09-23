@@ -20,5 +20,7 @@ class C {
 }
 
 // Использование транзитивного обращения
-const a = new A();
+const a = new A(); // Зачем объявлять эту переменную отдельно?
 a.getB().getC().doSomething();
+// Я бы сделал так:
+new A().getB().getC().doSomething();

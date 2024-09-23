@@ -12,3 +12,13 @@ class Calculator {
     return a / b;
   }
 }
+//сделал бы сразу "стрелочно", так код менее перегружен
+
+class Calculator {
+  public add: TCalcFn = (a, b) => a + b;
+  public subtract: TCalcFn = (a, b) => a - b;
+  public multiply: TCalcFn = (a, b) => a * b;
+  public divide: TCalcFn = (a, b) => a / b;
+  }
+}
+

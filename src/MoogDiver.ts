@@ -22,10 +22,12 @@ class MoogDiver {
   private diveForMoog(reason: string) {
     // some logic
     
-    if(reason === 'ok'){
-      this.splines.doOk();
-    } else {
-      this.splines.doNotOk();
-    }
+    // if(reason === 'ok'){
+    //   this.splines.doOk();
+    // } else {
+    //   this.splines.doNotOk();
+    // }
+    if (reason === 'ok') this.splines.doOk(); //емко, просто и понятно
+    else this.splines.doNotOk();
   }
 }

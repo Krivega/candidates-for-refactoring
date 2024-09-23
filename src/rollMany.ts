@@ -3,3 +3,6 @@ const rollMany = (n: number, pins: number) => {
     console.log(pins);
   }
 };
+//А вот тут я бы упростил и использовал стандартные общепринятые названия для переменных
+
+//  for (let i = 0; i < n; i++) {
