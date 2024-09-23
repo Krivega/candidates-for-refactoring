@@ -12,7 +12,9 @@ class Order {
 
 class Customer {
   private items: Item[];
-
+  
+  constructor() {} //кажется без этого не заработает
+  
   calculateTotalPrice(): number {
     // вычисление общей цены на основе items
   }
