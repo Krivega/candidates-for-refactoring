@@ -1,4 +1,4 @@
-class Car2 {
+class Car {
   public static readonly COLORS = ['red', 'blue', 'green'];
 
   public static isColorAvailable(color: string): boolean {
