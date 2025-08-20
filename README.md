@@ -17,7 +17,8 @@
 - Мертвый код и неиспользуемые методы
 
 **Время на выполнение**: 30-45 минут  
-**Примеры файлов**: `calculate.ts`, `formatPhoneNumber.ts`, `Calculator.ts`
+**Количество примеров**: 14 файлов  
+**Примеры файлов**: `calculate.ts`, `asyncProblems.ts`, `dataClass.ts`
 
 ### 🟡 Medium Level (`src/medium/`)
 **Нарушения принципов SOLID** и архитектурные проблемы средней сложности:
@@ -30,7 +31,8 @@
 - Неправильное использование наследования
 
 **Время на выполнение**: 60-90 минут  
-**Примеры файлов**: `ABC.ts`, `HighLevelModule.ts`, `Order.ts`, `User.ts`
+**Количество примеров**: 22 файла  
+**Примеры файлов**: `ABC.ts`, `primitiveObsession.ts`, `reactProblems.tsx`, `shotgunSurgery.ts`
 
 ### 🔴 Hard Level (`src/hard/`)
 **Сложные архитектурные антипаттерны** требующие глубокого рефакторинга:
@@ -43,7 +45,8 @@
 - Необходимость применения паттернов проектирования
 
 **Время на выполнение**: 90-120 минут  
-**Примеры файлов**: `processUserDataAndSendEmail.ts`, `MoogDiver.ts`, `createPayment.ts`
+**Количество примеров**: 12 файлов  
+**Примеры файлов**: `godObject.ts`, `circularDependency.ts`, `createPayment.ts`
 
 ## Задание для кандидатов
 

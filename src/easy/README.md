@@ -170,11 +170,47 @@ headers.set(match[1].toLowerCase(), match[2]); // match может быть null
 
 ---
 
+---
+
+### 13. `asyncProblems.ts` - Неправильная обработка промисов
+**Проблема**: Отсутствие обработки ошибок, смешивание async/await и .then().
+```typescript
+async function fetchUserData(userId: string) {
+  const user = await fetch(`/api/users/${userId}`); // Нет обработки ошибок
+  const userData = await user.json();
+  
+  const posts = await fetch(`/api/users/${userId}/posts`); // Последовательные запросы
+  const postsData = await posts.json();
+  
+  return { user: userData, posts: postsData };
+}
+```
+**Что нужно исправить**: 
+- Добавить try/catch блоки
+- Использовать Promise.all для параллельных запросов
+- Проверять статус ответа
+
+---
+
+### 14. `dataClass.ts` - Data Class антипаттерн
+**Проблема**: Класс содержит только геттеры/сеттеры без бизнес-логики.
+```typescript
+class PersonData {
+  getFirstName(): string { return this.firstName; }
+  setFirstName(firstName: string): void { this.firstName = firstName; }
+  // ... только геттеры и сеттеры
+}
+```
+**Что нужно исправить**: 
+- Добавить бизнес-логику в класс
+- Использовать readonly свойства где возможно
+- Переместить связанную логику из других классов
+
+---
+
 ### Остальные файлы содержат похожие простые проблемы:
-- `newDate.ts` - неясное имя переменной
 - `rollMany.ts` - неинформативные имена параметров
-- `shouldBeDeleted.ts`, `shouldNotCompact.ts` - пустые блоки условий
-- `SomeClass2.ts` - неиспользуемые переменные, бесполезный конструктор
+- `errors.ts` - непоследовательность в именовании констант
 
 ## Общие принципы для исправления:
 1. **Используйте осмысленные имена** для переменных, функций и классов

@@ -342,7 +342,61 @@ updateComment(comment) {
 
 ---
 
-### 19. `User.ts` - Слишком много аргументов в конструкторе
+### 19. `primitiveObsession.ts` - Primitive Obsession
+**Проблема**: Использование примитивов вместо создания специальных типов.
+```typescript
+// Много примитивных параметров вместо объектов
+transfer(
+  amount: number,
+  fromAccountNumber: string,
+  fromRoutingNumber: string,
+  toAccountNumber: string,
+  toRoutingNumber: string,
+  currency: string,
+  description: string
+) { /* ... */ }
+```
+**Что нужно исправить**: 
+- Создать классы Money, Account, Currency
+- Инкапсулировать валидацию в соответствующие классы
+- Использовать Value Objects
+
+---
+
+### 20. `reactProblems.tsx` - Проблемы в React компонентах
+**Проблема**: Множественные нарушения React best practices.
+```typescript
+useEffect(() => {
+  fetchUserData();
+}, []); // Missing dependency: userId
+
+// Вычисления в рендере без мемоизации
+const sortedPosts = posts.sort((a, b) => /* ... */);
+```
+**Что нужно исправить**: 
+- Исправить зависимости в useEffect
+- Использовать useMemo для вычислений
+- Избегать inline функций в JSX
+- Правильно обрабатывать асинхронные операции
+
+---
+
+### 21. `shotgunSurgery.ts` - Shotgun Surgery
+**Проблема**: Одно изменение требует правок во множестве файлов.
+```typescript
+// Курсы валют дублируются в разных классах
+if (currency === 'EUR') {
+  convertedAmount = amount * 1.1; // EUR to USD rate
+}
+```
+**Что нужно исправить**: 
+- Создать централизованный сервис для курсов валют
+- Использовать конфигурационные объекты
+- Применить паттерн Strategy для валютных операций
+
+---
+
+### 22. `User.ts` - Слишком много аргументов в конструкторе
 **Проблема**: Конструктор принимает 14 параметров.
 ```typescript
 constructor(

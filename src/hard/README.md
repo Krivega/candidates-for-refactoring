@@ -247,6 +247,54 @@ const updateUserInterests = (interestUUIDs) => {
 - Добавить обработку различных типов ошибок
 - Применить паттерн Chain of Responsibility для middleware
 
+---
+
+### 11. `godObject.ts` - God Object антипаттерн
+**Проблема**: Класс с слишком многими ответственностями.
+```typescript
+class UserManager {
+  // Управление пользователями
+  createUser(userData: any) { /* ... */ }
+  
+  // Email функциональность
+  sendWelcomeEmail(email: string, name: string) { /* ... */ }
+  
+  // Логирование
+  logInfo(message: string) { /* ... */ }
+  
+  // Статистика
+  updateUserStatistics(action: string) { /* ... */ }
+}
+```
+**Что нужно исправить**: 
+- Разделить на отдельные сервисы (UserService, EmailService, Logger, StatisticsService)
+- Применить паттерн Facade для координации
+- Использовать dependency injection
+- Создать четкие границы между доменами
+
+---
+
+### 12. `circularDependency.ts` - Circular Dependencies
+**Проблема**: Классы имеют циклическую зависимость друг от друга.
+```typescript
+class OrderService {
+  constructor() {
+    this.customerService = new CustomerService(); // CustomerService зависит от OrderService
+  }
+}
+
+class CustomerService {
+  constructor() {
+    this.orderService = new OrderService(); // Циклическая зависимость
+  }
+}
+```
+**Что нужно исправить**: 
+- Использовать dependency injection
+- Создать общий интерфейс или абстракцию
+- Применить паттерн Observer для уведомлений
+- Рассмотреть создание доменных событий
+
 ## Рекомендуемые паттерны для решения сложных проблем:
 
 ### Поведенческие паттерны:
