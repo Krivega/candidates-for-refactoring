@@ -2,15 +2,19 @@
 
 Эта категория содержит примеры более сложных проблем, связанных с архитектурой, принципами SOLID и паттернами проектирования.
 
-## Список файлов и проблем:
+## Список файлов и проблем
 
 ### 1. `ABC.ts` - Нарушение Law of Demeter (транзитивные обращения)
+
 **Проблема**: Цепочка вызовов нарушает принцип "говори только с друзьями".
+
 ```typescript
 const a = new A();
 a.getB().getC().doSomething(); // Транзитивное обращение
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Добавить метод в класс A, который инкапсулирует логику
 - Избегать длинных цепочек вызовов
 - Применить принцип "Tell, Don't Ask"
@@ -18,9 +22,12 @@ a.getB().getC().doSomething(); // Транзитивное обращение
 ---
 
 ### 2. `applyDiscount.ts` - Разные уровни абстракции, отсутствие типизации
+
 **Проблема**: Функции работают на разных уровнях абстракции, нет типов.
+
 ```javascript
-function calculateTotalPrice(items) { // Низкий уровень - работа с массивом
+function calculateTotalPrice(items) {
+  // Низкий уровень - работа с массивом
   let totalPrice = 0;
   items.forEach((item) => {
     totalPrice += item.price;
@@ -28,11 +35,14 @@ function calculateTotalPrice(items) { // Низкий уровень - рабо�
   return totalPrice;
 }
 
-function applyDiscount(totalPrice, discountPercentage) { // Высокий уровень - бизнес-логика
+function applyDiscount(totalPrice, discountPercentage) {
+  // Высокий уровень - бизнес-логика
   return totalPrice * (1 - discountPercentage / 100);
 }
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Добавить типизацию
 - Создать единый уровень абстракции
 - Выделить в отдельные модули или классы
@@ -40,7 +50,9 @@ function applyDiscount(totalPrice, discountPercentage) { // Высокий ур�
 ---
 
 ### 3. `approveLoan.ts` - Инкапсулирование условных конструкций
+
 **Проблема**: Сложное условие не инкапсулировано в отдельную функцию.
+
 ```typescript
 if (
   user.age >= 18 &&
@@ -51,7 +63,9 @@ if (
   approveLoan();
 }
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Создать функцию `isEligibleForLoan(user)`
 - Разбить сложное условие на логические части
 - Добавить константы для магических чисел
@@ -59,14 +73,18 @@ if (
 ---
 
 ### 4. `auth.ts` - Мутация входных объектов
+
 **Проблема**: Функция изменяет переданный объект.
+
 ```typescript
 const auth = (payment: TPayment, gateway: TGatewayService) => {
   const rcCode = gateway.sendAuth(payment);
   payment.rcCode = rcCode; // Мутация входного объекта
 };
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Возвращать новый объект вместо мутации
 - Использовать immutable подход
 - Четко документировать side effects
@@ -74,7 +92,9 @@ const auth = (payment: TPayment, gateway: TGatewayService) => {
 ---
 
 ### 5. `calculateArea.ts` - Использование switch вместо полиморфизма
+
 **Проблема**: Switch statement для разных типов фигур.
+
 ```typescript
 function calculateArea(shape: ShapeType, radiusOrSide: number): number {
   let area = 0;
@@ -89,7 +109,9 @@ function calculateArea(shape: ShapeType, radiusOrSide: number): number {
   return area;
 }
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Использовать полиморфизм - создать интерфейс Shape
 - Каждая фигура должна иметь свой метод calculateArea()
 - Применить паттерн Strategy или Factory
@@ -97,7 +119,9 @@ function calculateArea(shape: ShapeType, radiusOrSide: number): number {
 ---
 
 ### 6. `calculateWeeklyPay.ts` - Смешанные уровни абстракции
+
 **Проблема**: Функция работает с низкоуровневыми вычислениями и высокоуровневой логикой.
+
 ```typescript
 function calculateWeeklyPay(overtime: boolean): number {
   const tenthRate: number = getTenthRate();
@@ -110,7 +134,9 @@ function calculateWeeklyPay(overtime: boolean): number {
   return straightPay + overtimePay;
 }
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Вынести константы (400, 1.5)
 - Разбить на более мелкие функции
 - Улучшить читаемость через промежуточные переменные
@@ -118,7 +144,9 @@ function calculateWeeklyPay(overtime: boolean): number {
 ---
 
 ### 7. `fetchData.ts` - Нарушение принципа единственной ответственности
+
 **Проблема**: Функция выполняет запрос и обрабатывает результат.
+
 ```typescript
 function fetchData(url: string) {
   fetch(url, { timeout: DEFAULT_TIMEOUT })
@@ -126,7 +154,9 @@ function fetchData(url: string) {
     .catch((error) => console.error(error));
 }
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Разделить на fetch и обработку результата
 - Возвращать Promise для внешней обработки
 - Добавить типизацию для ответа
@@ -134,7 +164,9 @@ function fetchData(url: string) {
 ---
 
 ### 8. `HighLevelModule.ts` - Нарушение Dependency Inversion Principle
+
 **Проблема**: Высокоуровневый модуль зависит от низкоуровневого.
+
 ```typescript
 class HighLevelModule {
   private lowLevelModule: LowLevelModule;
@@ -144,7 +176,9 @@ class HighLevelModule {
   }
 }
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Использовать dependency injection
 - Создать интерфейс для абстракции
 - Инвертировать зависимость
@@ -152,7 +186,9 @@ class HighLevelModule {
 ---
 
 ### 9. `LimitedStack.ts` - Нарушение Liskov Substitution Principle
+
 **Проблема**: UnlimitedStack не может корректно реализовать percentFull().
+
 ```typescript
 class UnlimitedStack<T> implements Stack<T> {
   percentFull(): number {
@@ -160,7 +196,9 @@ class UnlimitedStack<T> implements Stack<T> {
   }
 }
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Пересмотреть иерархию интерфейсов
 - Разделить на разные интерфейсы
 - Применить Interface Segregation Principle
@@ -168,17 +206,21 @@ class UnlimitedStack<T> implements Stack<T> {
 ---
 
 ### 10. `Modem.ts` - Нарушение Interface Segregation Principle
+
 **Проблема**: Слишком большой интерфейс с разными ответственностями.
+
 ```typescript
 interface Modem {
-  dial: (phoneNumber: string) => boolean;      // Соединение
-  disconnect: () => boolean;                   // Соединение
-  send: (c: string) => boolean;               // Передача данных
-  recv: () => string;                         // Передача данных
-  getConnectedPhoneNumber: () => string;      // Информация о состоянии
+  dial: (phoneNumber: string) => boolean; // Соединение
+  disconnect: () => boolean; // Соединение
+  send: (c: string) => boolean; // Передача данных
+  recv: () => string; // Передача данных
+  getConnectedPhoneNumber: () => string; // Информация о состоянии
 }
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Разделить на несколько интерфейсов
 - Connection, DataTransmission, ConnectionInfo
 - Применить композицию интерфейсов
@@ -186,7 +228,9 @@ interface Modem {
 ---
 
 ### 11. `Order.ts` - Feature Envy (функциональная зависть)
+
 **Проблема**: Order делегирует всю работу Customer.
+
 ```typescript
 class Order {
   getTotalPrice(): number {
@@ -194,7 +238,9 @@ class Order {
   }
 }
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Переместить логику в правильный класс
 - Пересмотреть распределение ответственностей
 - Возможно, убрать лишний класс
@@ -202,7 +248,9 @@ class Order {
 ---
 
 ### 12. `OverloadedClass.ts` - Слишком много полей в классе
+
 **Проблема**: Класс имеет слишком много ответственностей.
+
 ```typescript
 class OverloadedClass {
   field1: number;
@@ -210,7 +258,9 @@ class OverloadedClass {
   // ... 10 полей
 }
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Разбить на несколько классов
 - Группировать связанные поля
 - Применить паттерн Composite
@@ -218,10 +268,13 @@ class OverloadedClass {
 ---
 
 ### 13. `pay.ts` - Отсутствие типизации и неясные зависимости
+
 **Проблема**: Глобальные переменные, нет типов.
+
 ```typescript
 const pay = () => {
-  for (let e of employees) { // employees не определен
+  for (let e of employees) {
+    // employees не определен
     if (e.isPayday()) {
       const pay = e.calculatePay();
       e.deliverPay(pay);
@@ -229,7 +282,9 @@ const pay = () => {
   }
 };
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Добавить типизацию
 - Инжектировать зависимости
 - Обработать возможные ошибки
@@ -237,12 +292,14 @@ const pay = () => {
 ---
 
 ### 14. `processUserData.ts` - Плохо написанные комментарии
+
 **Проблема**: Комментарии дублируют код.
+
 ```typescript
 function processUserData(user) {
   // Получаем данные пользователя
   const userData = getUserData(user);
-  
+
   // Проверяем данные пользователя
   if (userData.age >= 18) {
     // Обрабатываем данные
@@ -253,7 +310,9 @@ function processUserData(user) {
   }
 }
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Убрать избыточные комментарии
 - Улучшить имена функций и переменных
 - Добавить типизацию
@@ -261,23 +320,27 @@ function processUserData(user) {
 ---
 
 ### 15. `render.ts` - Смешанные уровни абстракции
+
 **Проблема**: Функция работает с низкоуровневой конкатенацией строк.
+
 ```typescript
 const render = (size: number) => {
   const html = new StringBuffer('<hr');
-  
+
   if (size > 0) {
     html
       .append(' size="')
       .append(size + 1)
       .append('"');
   }
-  
+
   html.append('>');
   return html.toString();
 };
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Использовать шаблонные строки
 - Выделить логику форматирования
 - Добавить валидацию входных данных
@@ -285,21 +348,27 @@ const render = (size: number) => {
 ---
 
 ### 16. `SomeClass.ts` - Мертвый код и неиспользуемые методы
+
 **Проблема**: Код содержит недостижимые участки.
+
 ```typescript
 class SomeClass {
-  private neverUsedMethod() { // Неиспользуемый метод
-      console.log("This function is called");
+  private neverUsedMethod() {
+    // Неиспользуемый метод
+    console.log('This function is called');
   }
 
   public someMethod() {
-      if (false) { // Недостижимый код
-          doSomethingThatNeverHappens();
-      }
+    if (false) {
+      // Недостижимый код
+      doSomethingThatNeverHappens();
+    }
   }
 }
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Удалить мертвый код
 - Убрать неиспользуемые методы
 - Исправить логические ошибки
@@ -307,7 +376,9 @@ class SomeClass {
 ---
 
 ### 17. `StatisticsCollector.ts` - Магические числа и флаги в аргументах
+
 **Проблема**: Магическое число и неясная логика форматирования.
+
 ```typescript
 formatTraffic(trafficInBytes: number, formatType: TFormatType) {
   switch (formatType) {
@@ -318,7 +389,9 @@ formatTraffic(trafficInBytes: number, formatType: TFormatType) {
   }
 }
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Вынести константу для конвертации
 - Использовать enum или константы
 - Добавить валидацию
@@ -326,7 +399,9 @@ formatTraffic(trafficInBytes: number, formatType: TFormatType) {
 ---
 
 ### 18. `updateComment.ts` - Неясная логика и неправильное именование
+
 **Проблема**: Метод называется "update", но может создавать.
+
 ```typescript
 updateComment(comment) {
   if (this.getComment(comment.id)) {
@@ -335,7 +410,9 @@ updateComment(comment) {
   return this.requestToCreateComment(comment); // Создание в методе update
 }
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Переименовать в `upsertComment`
 - Разделить логику создания и обновления
 - Добавить типизацию
@@ -343,7 +420,9 @@ updateComment(comment) {
 ---
 
 ### 19. `primitiveObsession.ts` - Primitive Obsession
+
 **Проблема**: Использование примитивов вместо создания специальных типов.
+
 ```typescript
 // Много примитивных параметров вместо объектов
 transfer(
@@ -356,7 +435,9 @@ transfer(
   description: string
 ) { /* ... */ }
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Создать классы Money, Account, Currency
 - Инкапсулировать валидацию в соответствующие классы
 - Использовать Value Objects
@@ -364,7 +445,9 @@ transfer(
 ---
 
 ### 20. `reactProblems.tsx` - Проблемы в React компонентах
+
 **Проблема**: Множественные нарушения React best practices.
+
 ```typescript
 useEffect(() => {
   fetchUserData();
@@ -373,7 +456,9 @@ useEffect(() => {
 // Вычисления в рендере без мемоизации
 const sortedPosts = posts.sort((a, b) => /* ... */);
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Исправить зависимости в useEffect
 - Использовать useMemo для вычислений
 - Избегать inline функций в JSX
@@ -382,14 +467,18 @@ const sortedPosts = posts.sort((a, b) => /* ... */);
 ---
 
 ### 21. `shotgunSurgery.ts` - Shotgun Surgery
+
 **Проблема**: Одно изменение требует правок во множестве файлов.
+
 ```typescript
 // Курсы валют дублируются в разных классах
 if (currency === 'EUR') {
   convertedAmount = amount * 1.1; // EUR to USD rate
 }
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Создать централизованный сервис для курсов валют
 - Использовать конфигурационные объекты
 - Применить паттерн Strategy для валютных операций
@@ -397,7 +486,9 @@ if (currency === 'EUR') {
 ---
 
 ### 22. `User.ts` - Слишком много аргументов в конструкторе
+
 **Проблема**: Конструктор принимает 14 параметров.
+
 ```typescript
 constructor(
   name: string,
@@ -408,12 +499,15 @@ constructor(
   // ...
 }
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Использовать паттерн Builder
 - Группировать параметры в объекты
 - Применить паттерн Parameter Object
 
-## Общие принципы для исправления:
+## Общие принципы для исправления
+
 1. **Следуйте принципам SOLID**
 2. **Избегайте длинных цепочек вызовов** (Law of Demeter)
 3. **Инкапсулируйте сложные условия** в отдельные функции

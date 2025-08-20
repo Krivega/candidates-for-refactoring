@@ -2,10 +2,12 @@
 
 Эта категория содержит примеры сложных архитектурных проблем, которые требуют глубокого понимания принципов проектирования и рефакторинга.
 
-## Список файлов и проблем:
+## Список файлов и проблем
 
 ### 1. `createPayment.ts` - Сложная условная логика и дублирование
+
 **Проблема**: Дублирование кода, сложная логика ветвления, скрытые зависимости.
+
 ```typescript
 const createPayment = (isToken: Boolean) => {
   if (isToken) {
@@ -17,7 +19,9 @@ const createPayment = (isToken: Boolean) => {
   }
 };
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Применить паттерн Strategy для разных типов платежей
 - Использовать dependency injection для внешних зависимостей
 - Создать фабрику платежных методов
@@ -26,7 +30,9 @@ const createPayment = (isToken: Boolean) => {
 ---
 
 ### 2. `Director.ts` - Неочевидная зависимость и возможная избыточность
+
 **Проблема**: Класс Director может быть избыточной абстракцией.
+
 ```typescript
 class Director {
   calendar: Calendar;
@@ -40,7 +46,9 @@ class Director {
   }
 }
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Оценить необходимость класса Director
 - Добавить дополнительную логику или убрать класс
 - Применить паттерн Decorator если нужна дополнительная функциональность
@@ -49,7 +57,9 @@ class Director {
 ---
 
 ### 3. `FilmController.ts` - Скрытые временные привязки и нарушение инкапсуляции
+
 **Проблема**: Состояние объекта изменяется неявно, нарушена инкапсуляция.
+
 ```typescript
 class FilmController {
   openDetails() {
@@ -62,7 +72,9 @@ class FilmController {
   }
 }
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Объявить все поля класса явно
 - Инкапсулировать состояние popup
 - Применить паттерн State Machine для управления состояниями
@@ -71,7 +83,9 @@ class FilmController {
 ---
 
 ### 4. `MoogDiver.ts` - Сложная логика с условными конструкциями и неясные имена
+
 **Проблема**: Непонятные имена методов, сложная логика, магические строки.
+
 ```typescript
 class MoogDiver {
   public dive(reason: string) {
@@ -81,7 +95,8 @@ class MoogDiver {
   }
 
   private diveForMoog(reason: string) {
-    if(reason === 'ok'){ // Магическая строка
+    if (reason === 'ok') {
+      // Магическая строка
       this.splines.doOk();
     } else {
       this.splines.doNotOk();
@@ -89,7 +104,9 @@ class MoogDiver {
   }
 }
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Переименовать методы в понятные имена
 - Использовать enum вместо магических строк
 - Применить паттерн Command для разных типов действий
@@ -99,13 +116,17 @@ class MoogDiver {
 ---
 
 ### 5. `process.ts` - Отсутствие контекста и зависимостей
+
 **Проблема**: Глобальные функции без контекста, неясные зависимости.
+
 ```typescript
 processVerificationRequest();
 makeUpdateRequest();
 processDeletion();
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Создать класс или модуль для группировки связанных операций
 - Добавить dependency injection для внешних зависимостей
 - Применить паттерн Chain of Responsibility для последовательной обработки
@@ -115,7 +136,9 @@ processDeletion();
 ---
 
 ### 6. `processOrder.ts` - Флаги в аргументах и неполная реализация
+
 **Проблема**: Boolean флаг в аргументах, неполная реализация логики.
+
 ```typescript
 function processOrder(item: unknown, isExpress: boolean) {
   if (isExpress) {
@@ -125,7 +148,9 @@ function processOrder(item: unknown, isExpress: boolean) {
   }
 }
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Применить паттерн Strategy для разных типов доставки
 - Создать отдельные классы для ExpressDelivery и StandardDelivery
 - Использовать полиморфизм вместо условных конструкций
@@ -135,7 +160,9 @@ function processOrder(item: unknown, isExpress: boolean) {
 ---
 
 ### 7. `processUserDataAndSendEmail.ts` - Нарушение Single Responsibility Principle
+
 **Проблема**: Функция выполняет две разные операции.
+
 ```typescript
 function processUserDataAndSendEmail(user: User) {
   // Обработка данных пользователя
@@ -145,7 +172,9 @@ function processUserDataAndSendEmail(user: User) {
   emailService.sendEmail(user.email, 'Данные обработаны успешно');
 }
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Разделить на две отдельные функции
 - Применить паттерн Observer для уведомлений
 - Создать событийную архитектуру (Event-Driven)
@@ -155,20 +184,25 @@ function processUserDataAndSendEmail(user: User) {
 ---
 
 ### 8. `ScreenShare.ts` - Сложная логика управления состоянием
+
 **Проблема**: Метод выполняет множество операций, неясная последовательность.
+
 ```typescript
 class ScreenShare {
   startPresentationWithoutSound(mediaStream: MediaStream, isExistsAudioTracks: boolean) {
-    this.stopPresentation();        // 1. Останавливаем
+    this.stopPresentation(); // 1. Останавливаем
     this.startPresentation(mediaStream); // 2. Запускаем
-    
-    if (isExistsAudioTracks) {      // 3. Условно отключаем звук
+
+    if (isExistsAudioTracks) {
+      // 3. Условно отключаем звук
       this.muteAudio();
     }
   }
 }
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Применить паттерн State Machine для управления состояниями презентации
 - Разбить на атомарные операции
 - Использовать паттерн Template Method для определения алгоритма
@@ -178,7 +212,9 @@ class ScreenShare {
 ---
 
 ### 9. `ServerApi.ts` - Нарушение принципа единообразия API
+
 **Проблема**: Разные методы используют разные HTTP методы для похожих операций.
+
 ```typescript
 class ServerApi {
   public processAddAccountRequest(url: string, account: TAccount) {
@@ -194,7 +230,9 @@ class ServerApi {
   }
 }
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Привести к единому стилю именования методов
 - Исправить неправильное использование HTTP методов
 - Применить паттерн Builder для создания запросов
@@ -205,17 +243,19 @@ class ServerApi {
 ---
 
 ### 10. `updateUserInterests.ts` - Дублирование кода и нарушение DRY
+
 **Проблема**: Два метода с почти идентичной логикой.
+
 ```typescript
 const updateUserHandle = (handle) => {
   if (!isLoggedIn()) {
     toLoginPage();
     return;
   }
-  
+
   const token = getToken();
   const headers = getHeaders(token);
-  
+
   return fetch(`${domain}/v1/users/handle`, {
     method: 'PUT',
     headers,
@@ -224,14 +264,15 @@ const updateUserHandle = (handle) => {
 };
 
 const updateUserInterests = (interestUUIDs) => {
-  if (!isLoggedIn()) {      // Дублирование
+  if (!isLoggedIn()) {
+    // Дублирование
     toLoginPage();
     return;
   }
-  
-  const token = getToken();  // Дублирование
+
+  const token = getToken(); // Дублирование
   const headers = getHeaders(token); // Дублирование
-  
+
   return fetch(`${domain}/v1/users/interests`, {
     method: 'PUT',
     headers,
@@ -239,7 +280,9 @@ const updateUserInterests = (interestUUIDs) => {
   });
 };
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Создать базовую функцию для авторизованных запросов
 - Применить паттерн Template Method
 - Использовать паттерн Decorator для добавления авторизации
@@ -250,23 +293,35 @@ const updateUserInterests = (interestUUIDs) => {
 ---
 
 ### 11. `godObject.ts` - God Object антипаттерн
+
 **Проблема**: Класс с слишком многими ответственностями.
+
 ```typescript
 class UserManager {
   // Управление пользователями
-  createUser(userData: any) { /* ... */ }
-  
+  createUser(userData: any) {
+    /* ... */
+  }
+
   // Email функциональность
-  sendWelcomeEmail(email: string, name: string) { /* ... */ }
-  
+  sendWelcomeEmail(email: string, name: string) {
+    /* ... */
+  }
+
   // Логирование
-  logInfo(message: string) { /* ... */ }
-  
+  logInfo(message: string) {
+    /* ... */
+  }
+
   // Статистика
-  updateUserStatistics(action: string) { /* ... */ }
+  updateUserStatistics(action: string) {
+    /* ... */
+  }
 }
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Разделить на отдельные сервисы (UserService, EmailService, Logger, StatisticsService)
 - Применить паттерн Facade для координации
 - Использовать dependency injection
@@ -275,7 +330,9 @@ class UserManager {
 ---
 
 ### 12. `circularDependency.ts` - Circular Dependencies
+
 **Проблема**: Классы имеют циклическую зависимость друг от друга.
+
 ```typescript
 class OrderService {
   constructor() {
@@ -289,15 +346,18 @@ class CustomerService {
   }
 }
 ```
-**Что нужно исправить**: 
+
+**Что нужно исправить**:
+
 - Использовать dependency injection
 - Создать общий интерфейс или абстракцию
 - Применить паттерн Observer для уведомлений
 - Рассмотреть создание доменных событий
 
-## Рекомендуемые паттерны для решения сложных проблем:
+## Рекомендуемые паттерны для решения сложных проблем
 
-### Поведенческие паттерны:
+### Поведенческие паттерны
+
 - **Strategy** - для разных алгоритмов обработки
 - **State Machine** - для управления сложными состояниями
 - **Observer** - для событийной архитектуры
@@ -305,25 +365,29 @@ class CustomerService {
 - **Chain of Responsibility** - для последовательной обработки
 - **Template Method** - для определения алгоритма с вариативными шагами
 
-### Структурные паттерны:
+### Структурные паттерны
+
 - **Adapter** - для интеграции разных API
 - **Decorator** - для добавления функциональности
 - **Facade** - для упрощения сложных интерфейсов
 - **Composite** - для работы с иерархическими структурами
 
-### Порождающие паттерны:
+### Порождающие паттерны
+
 - **Factory** - для создания объектов разных типов
 - **Builder** - для создания сложных объектов
 - **Abstract Factory** - для семейств связанных объектов
 
-### Архитектурные принципы:
+### Архитектурные принципы
+
 1. **Event-Driven Architecture** - для слабо связанных компонентов
 2. **Dependency Injection** - для управления зависимостями
 3. **CQRS** - для разделения команд и запросов
 4. **Repository Pattern** - для абстракции доступа к данным
 5. **Unit of Work** - для управления транзакциями
 
-## Общие принципы рефакторинга сложного кода:
+## Общие принципы рефакторинга сложного кода
+
 1. **Выделяйте общие паттерны** и создавайте абстракции
 2. **Разбивайте сложную логику** на более мелкие, понятные части
 3. **Используйте композицию** вместо наследования где возможно
